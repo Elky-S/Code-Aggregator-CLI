@@ -1,28 +1,41 @@
 # 🛠️ Code Aggregator CLI
-**A high-performance C# CLI tool for automated code file aggregation, featuring advanced filtering and output management.**
 
-This tool was designed to help developers quickly gather source code from multiple files into a single document, making it easier to share, review, or feed into LLMs (Large Language Models) for analysis.
+**A high-performance C# tool to bundle source code files into a single organized package.**
 
-## 🚀 Key Features
-* **Recursive Search: Automatically traverses through subdirectories.**
+---
 
-* **Smart Filtering: Includes/Excludes files based on extensions (e.g., .cs, .py, .js).**
+## 🚀 Commands
 
-Clean Output: Merges code into a formatted file with clear headers indicating the source of each snippet.
+### 📦 `bundle`
+The main command to package your code. 
+* **`-l, --language`**: Select languages (e.g., `cs`, `py`, `all`). [Required]
+* **`-o, --output`**: Set destination path or filename.
+* **`-n, --note`**: Include source file headers (path and name).
+* **`-s, --sort`**: Order by `name` (alphabetical) or `type` (extension).
+* **`-r, --remove-empty-lines`**: Strip empty lines from source.
+* **`-a, --author`**: Add the creator's name to the file header.
 
-Performance: Built on .NET 8 for speed and reliability.
+### ✍️ `create-rsp`
+An interactive wizard that asks questions and generates a **Response File** (`.rsp`) with your preferred configuration. This avoids the need to type long commands repeatedly.
 
-## 💻 How to Use
-**Clone the repository:**
-git clone https://github.com/Elky-S/Code-Aggregator-CLI.git
-cd Code-Aggregator-CLI/cli
-**Run the application:**
-Use the dotnet run command followed by your parameters:
-dotnet run -- --root "C:/Path/To/Your/Project" --output "merged_code.txt"
-## 🛠️ Built With
-C# / .NET 8
+## 💡 Smart Filtering
+* **Recursive Search**: Automatically traverses all subdirectories.
+* **Auto-Ignore**: Intelligent filtering that skips `bin`, `debug`, and `obj` folders to keep the bundle clean.
 
-System.CommandLine - For robust CLI argument parsing.
+## 💻 Installation & Usage
 
-## 📄 License
-This project is open-source and available under the MIT License.
+### 1. Installation
+* **Build**: Run `dotnet build` in the project directory.
+* **Global Access**: Add the `/publish` folder path to your system **Environment Variables (PATH)** to run the tool from any location.
+
+### 2. Usage Example
+To run the tool using a response file:
+```bash
+dotnet @mybundle.rsp
+```
+## 📚 References
+This project was developed following the official Microsoft documentation for **System.CommandLine**:
+* [Microsoft Learn - Command-line syntax](https://learn.microsoft.com/en-us/dotnet/standard/commandline/syntax)
+
+---
+Built using **System.CommandLine** (.NET 8).
